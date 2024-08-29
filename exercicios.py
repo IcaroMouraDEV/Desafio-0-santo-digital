@@ -1,3 +1,6 @@
+from itertools import combinations
+
+
 def exercicio_1(n: int):
   return [i * '*' for i in range(1, n + 1)];
 
@@ -36,18 +39,21 @@ def exercicio_2(arr: list,  allow_duplicates=True, sorted_pairs=True,  unique_pa
   return pairs;
 
 
-def exercicio_3(conj: list):
-  subs = [[]];
+def exercicio_3(sets: list, max_size=None, min_size=0, distinct_only=False, sort_subsets=False):
+  subs = [];
 
-  for item in conj:
-    novo_subs = [];
+  if distinct_only:
+    sets = list(set(sets));
 
-    for sub in subs:
-      novo_subs.append(sub + [item])
+  for size in range(min_size, (max_size or len(sets)) + 1):
+    new_subs = [];
+    for sub in combinations(sets, size):
+      new_subs.append(list(sub))
     
-    subs.extend(novo_subs)
+    subs.extend(new_subs)
+  
+  if sort_subsets:
+    subs = [sorted(sub) for sub in subs];
+    subs.sort(key=lambda x: (len(x), x))
 
   return subs;
-
-
-print(exercicio_3([5, 3, 5, 9, 7, 11]));
