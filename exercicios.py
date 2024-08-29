@@ -7,10 +7,10 @@ def exercicio_1(n: int):
 
 def exercicio_2(arr: list,  allow_duplicates=True, sorted_pairs=True,  unique_pairs=False):
   if len(arr) < 2:
-    return []; # tem que ter no minimo 2 elementos
+    return [];
 
   if not allow_duplicates:
-    arr = [*set(arr)]; # eliminando duplicatas
+    arr = list(set(arr));
   
   if sorted_pairs:
     arr.sort();
